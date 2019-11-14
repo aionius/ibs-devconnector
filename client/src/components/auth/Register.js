@@ -1,6 +1,10 @@
 import React from "react";
-import Axios from "axios";
 import Classnames from "classnames";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+
+import { registerUser } from "../../actions/authActions";
 
 class Register extends React.Component {
    constructor() {
@@ -18,6 +22,14 @@ class Register extends React.Component {
       this.onSubmit = this.onSubmit.bind(this);
    }
 
+   componentWillReceiveProps(nextProps) {
+      if (nextProps.errors) {
+         this.setState({
+            errors: nextProps.errors
+         });
+      }
+   }
+
    onChange(event) {
       const { name, value } = event.target;
       this.setState({ [name]: value });
@@ -32,11 +44,7 @@ class Register extends React.Component {
          password2: this.state.password2
       };
 
-      Axios.post("/api/users/register", newUser)
-         .then(result => {
-            console.log(result.data);
-         })
-         .catch(error => this.setState({ errors: error.response.data }));
+      this.props.registerUser(newUser, this.props.history);
    }
 
    render() {
@@ -149,4 +157,15 @@ class Register extends React.Component {
    }
 }
 
-export default Register;
+Register.propTypes = {
+   registerUser: PropTypes.func.isRequired,
+   auth: PropTypes.object.isRequired,
+   errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+   auth: state.auth,
+   errors: state.errors
+});
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

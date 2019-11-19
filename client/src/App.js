@@ -11,6 +11,7 @@ import Login from "./components/auth/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
+import EditProfile from "./components/edit-profile/EditProfile";
 
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -19,6 +20,7 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import store from "./store";
 
 import "./App.css";
+import AddExperience from "./components/add-credentials/AddExperience";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -64,6 +66,20 @@ class App extends React.Component {
                            exact
                            path="/create-profile"
                            component={CreateProfile}
+                        />
+                     </Switch>
+                     <Switch>
+                        <PrivateRoute
+                           exact
+                           path="/edit-profile"
+                           component={EditProfile}
+                        />
+                     </Switch>
+                     <Switch>
+                        <PrivateRoute
+                           exact
+                           path="/add-experience"
+                           component={AddExperience}
                         />
                      </Switch>
                   </div>

@@ -26,12 +26,12 @@ const UserSchema = new Schema(
    }
 );
 
-UserSchema.pre("save", async function(next) {
-   const user = this;
-   if (user.isModified("password")) {
-      user.password = await bcrypt.hash(user.password, 10);
-   }
-});
+// UserSchema.pre("save", async function(next) {
+//    const user = this;
+//    if (user.isModified("password")) {
+//       user.password = await bcrypt.hash(user.password, 10);
+//    }
+// });
 
 UserSchema.methods.toJSON = function() {
    const user = this;

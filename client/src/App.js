@@ -12,6 +12,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
+import Profiles from "./components/profiles/Profiles";
 
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -55,6 +56,7 @@ class App extends React.Component {
                   <div className="container">
                      <Route exact path="/register" component={Register} />
                      <Route exact path="/login" component={Login} />
+                     <Route exact path="/profiles" component={Profiles} />
                      <Switch>
                         <PrivateRoute
                            exact

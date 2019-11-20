@@ -5,7 +5,8 @@ import {
    PROFILE_LOADING,
    CLEAR_CURRENT_PROFILE,
    GET_ERRORS,
-   SET_CURRENT_USER
+   SET_CURRENT_USER,
+   GET_PROFILES
 } from "./types";
 
 // get current profile
@@ -108,4 +109,13 @@ export const deleteEducation = eduId => dispatch => {
       .catch(error =>
          dispatch({ type: GET_ERRORS, payload: error.response.data })
       );
+};
+
+// get all profiles
+export const getProfiles = () => dispatch => {
+   dispatch(setProfileLoading());
+
+   Axios.get("/api/profile/all")
+      .then(result => dispatch({ type: GET_PROFILES, payload: result.data }))
+      .catch(error => dispatch({ type: GET_PROFILES, payload: null }));
 };

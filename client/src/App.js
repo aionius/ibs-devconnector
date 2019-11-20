@@ -21,6 +21,7 @@ import store from "./store";
 
 import "./App.css";
 import AddExperience from "./components/add-credentials/AddExperience";
+import AddEducation from "./components/add-credentials/AddEducation";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -80,6 +81,13 @@ class App extends React.Component {
                            exact
                            path="/add-experience"
                            component={AddExperience}
+                        />
+                     </Switch>
+                     <Switch>
+                        <PrivateRoute
+                           exact
+                           path="/add-education"
+                           component={AddEducation}
                         />
                      </Switch>
                   </div>

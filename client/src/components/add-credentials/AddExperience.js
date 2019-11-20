@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 
+import { addExperience } from "../../actions/profileActions";
+
 class AddExperience extends React.Component {
    constructor(props) {
       super(props);
@@ -17,9 +19,9 @@ class AddExperience extends React.Component {
          from: "",
          to: "",
          current: false,
+         disabled: false,
          description: "",
-         errors: {},
-         disabled: false
+         errors: {}
       };
 
       this.onSubmit = this.onSubmit.bind(this);
@@ -29,7 +31,17 @@ class AddExperience extends React.Component {
 
    onSubmit = event => {
       event.preventDefault();
-      console.log("submitted");
+      const expData = {
+         company: this.state.company,
+         title: this.state.title,
+         location: this.state.location,
+         from: this.state.from,
+         to: this.state.to,
+         current: this.state.current,
+         description: this.state.description
+      };
+
+      this.props.addExperience(expData, this.props.history);
    };
 
    onChange = event => {
@@ -43,6 +55,12 @@ class AddExperience extends React.Component {
          disabled: !this.state.disabled
       });
    };
+
+   componentWillReceiveProps(nextProps) {
+      if (nextProps.errors) {
+         this.setState({ errors: nextProps.errors });
+      }
+   }
 
    render() {
       const { errors } = this.state;
@@ -128,7 +146,7 @@ class AddExperience extends React.Component {
 
                         <TextAreaFieldGroup
                            placeholder=""
-                           name=""
+                           name="description"
                            value={this.state.description}
                            onChange={this.onChange}
                            error={errors.description}
@@ -149,13 +167,14 @@ class AddExperience extends React.Component {
 }
 
 AddExperience.propTypes = {
-   profile: PropTypes.object.isRequired,
+   addExperience: PropTypes.func.isRequired,
    errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-   profile: state.profile,
    errors: state.errors
 });
 
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(mapStateToProps, { addExperience })(
+   withRouter(AddExperience)
+);

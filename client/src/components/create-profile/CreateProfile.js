@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import TextFieldGroup from "../common/TextFieldGroup";
@@ -136,14 +136,15 @@ class CreateProfile extends React.Component {
          { label: "Intern", value: "Intern" },
          { label: "Other", value: "Other" }
       ];
+
       return (
          <div className="create-profile">
             <div className="container">
                <div className="row">
                   <div className="col-md-8 m-auto">
-                     <a href="dashboard.html" className="btn btn-light">
+                     <Link to="/dashboard" className="btn btn-light">
                         Go Back
-                     </a>
+                     </Link>
                      <h1 className="display-4 text-center">
                         Create Your Profile
                      </h1>
@@ -273,6 +274,7 @@ class CreateProfile extends React.Component {
 }
 
 CreateProfile.propTypes = {
+   createProfile: PropTypes.func.isRequired,
    profile: PropTypes.object.isRequired,
    errors: PropTypes.object.isRequired
 };

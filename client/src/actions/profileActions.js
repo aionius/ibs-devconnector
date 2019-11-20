@@ -59,7 +59,25 @@ export const clearCurrentProfile = () => {
 export const createProfile = (profileData, history) => dispatch => {
    Axios.post("/api/profile", profileData)
       .then(result => history.push("/dashboard"))
-      .catch(error =>
-         dispatch({ type: GET_ERRORS, payload: error.response.data })
-      );
+      .catch(error => {
+         dispatch({ type: GET_ERRORS, payload: error.response.data });
+      });
+};
+
+// add experience
+export const addExperience = (expData, history) => dispatch => {
+   Axios.post("/api/profile/experience", expData)
+      .then(result => history.push("/dashboard"))
+      .catch(error => {
+         dispatch({ type: GET_ERRORS, payload: error.response.data });
+      });
+};
+
+// add education
+export const addEducation = (eduData, history) => dispatch => {
+   Axios.post("/api/profile/education", eduData)
+      .then(result => history.push("/dashboard"))
+      .catch(error => {
+         dispatch({ type: GET_ERRORS, payload: error.response.data });
+      });
 };

@@ -73,6 +73,20 @@ export const addExperience = (expData, history) => dispatch => {
       });
 };
 
+// delete experience
+export const deleteExperience = expId => dispatch => {
+   Axios.delete(`/api/profile/experience/${expId}`)
+      .then(result =>
+         dispatch({
+            type: GET_PROFILE,
+            payload: result.data
+         })
+      )
+      .catch(error =>
+         dispatch({ type: GET_ERRORS, payload: error.response.data })
+      );
+};
+
 // add education
 export const addEducation = (eduData, history) => dispatch => {
    Axios.post("/api/profile/education", eduData)
@@ -80,4 +94,18 @@ export const addEducation = (eduData, history) => dispatch => {
       .catch(error => {
          dispatch({ type: GET_ERRORS, payload: error.response.data });
       });
+};
+
+// delete education
+export const deleteEducation = eduId => dispatch => {
+   Axios.delete(`/api/profile/education/${eduId}`)
+      .then(result =>
+         dispatch({
+            type: GET_PROFILE,
+            payload: result.data
+         })
+      )
+      .catch(error =>
+         dispatch({ type: GET_ERRORS, payload: error.response.data })
+      );
 };

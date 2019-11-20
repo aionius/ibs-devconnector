@@ -139,7 +139,7 @@ class AddEducation extends React.Component {
                               className="form-check-label"
                               htmlFor="current"
                            >
-                              Current Job
+                              Current
                            </label>
                         </div>
 

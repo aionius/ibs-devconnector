@@ -28,6 +28,15 @@ export const getCurrentProfile = () => dispatch => {
       );
 };
 
+// get profile by handle
+export const getProfileByHandle = handle => dispatch => {
+   dispatch(setProfileLoading());
+
+   Axios.get(`/api/profile/handle/${handle}`)
+      .then(result => dispatch({ type: GET_PROFILE, payload: result.data }))
+      .catch(error => dispatch({ type: GET_PROFILE, payload: null }));
+};
+
 // delete account and profile
 export const deleteAccount = () => dispatch => {
    if (window.confirm("Are you sure? THis can NOT be undone!")) {

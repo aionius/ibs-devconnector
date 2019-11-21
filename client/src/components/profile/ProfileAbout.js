@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import isEmpty from "../../validations/is-empty";
 
@@ -37,5 +38,9 @@ class ProfileAbout extends React.Component {
       );
    }
 }
+
+ProfileAbout.propTypes = {
+   profile: PropTypes.object.isRequired
+};
 
 export default ProfileAbout;

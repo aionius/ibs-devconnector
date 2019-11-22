@@ -14,6 +14,9 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import AddExperience from "./components/add-credentials/AddExperience";
+import AddEducation from "./components/add-credentials/AddEducation";
+import NotFound from "./components/not-found/NotFound";
 
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -22,8 +25,6 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import store from "./store";
 
 import "./App.css";
-import AddExperience from "./components/add-credentials/AddExperience";
-import AddEducation from "./components/add-credentials/AddEducation";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -38,9 +39,9 @@ if (localStorage.jwtToken) {
    const currentTime = Date.now() / 1000;
    if (decoded.exp < currentTime) {
       // logout user
-      store.dispatch(logoutUser);
+      store.dispatch(logoutUser());
       // clear current profile
-      store.dispatch(clearCurrentProfile);
+      store.dispatch(clearCurrentProfile());
       // redirect to login
       window.location.href = "/login";
    }
@@ -94,6 +95,7 @@ class App extends React.Component {
                            component={AddEducation}
                         />
                      </Switch>
+                     <Route exact path="/not-found" component={NotFound} />
                   </div>
                   <Footer />
                </div>
